@@ -26,5 +26,7 @@ st.subheader("Num pickups per hour")
 hist_values=np.histogram(data[DATE_COLUMN].dt.hour, bins = 24, range =(0,24))[0]
 st.bar_chart(hist_values)
 
-st.subheader("Map of Pickups")
-st.map(data)
+hour_to_filter= st.slider("Hour",0,23,17)
+filtered_data=data[data[DATE_COLUMN].dt.hour==hour_to_filter]
+st.subheader(f"Map of All Pickups at {hour_to_filter}:00")
+st.map(filtered_data)
